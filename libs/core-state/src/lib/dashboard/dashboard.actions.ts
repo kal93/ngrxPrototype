@@ -1,9 +1,9 @@
-// Actions
 import { Item } from '@jl/core-data';
 import { Action } from '@ngrx/store';
 
 export enum DashBoardActionTypes {
   LoadCartItems = '[Cart] Load Cart Items',
+  LoadDashBoardItems = '[ItemList] Load Dash Board Items',
   AddNewItemToCart = '[ItemList] Add New Item to Cart',
   IncreaseQty = '[ItemList] Increase Quantity',
   DecreaseQty = '[ItemList] Decrease Quantity',
@@ -29,4 +29,13 @@ export class DecreaseQty implements Action {
   constructor(public payLoad) {}
 }
 
-export type DashBoardActions = AddNewItemToCart | IncreaseQty | DecreaseQty;
+export class LoadDashBoardItems implements Action {
+  readonly type = DashBoardActionTypes.LoadDashBoardItems;
+  constructor(public payLoad: Item[]) {}
+}
+
+export type DashBoardActions = AddNewItemToCart | IncreaseQty | DecreaseQty | LoadDashBoardItems;
+
+
+// case DashBoardActionTypes.LoadDashBoardItems:
+//       return adapter.addMany(action.payLoad, state);

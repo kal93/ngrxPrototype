@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { DashBoardActionTypes } from './dashboard.actions';
 
-const initialItems: Item[] = [
+export const initialItems: Item[] = [
   {
     name: 'Cap',
     image:
@@ -68,7 +68,8 @@ const getItemsInCart = (items: Item[]) => {
 };
 
 const updateItems = (items: Item[], item: Item) =>
-  items.map((i) => { return i.name === item.name ? { ...item, quantity: 1 } : i;
+  items.map((i) => {
+    return i.name === item.name ? { ...item, quantity: 1 } : i;
   });
 
 export interface DashBoardState {
@@ -89,6 +90,11 @@ export function dashBoardReducer(
   action
 ): DashBoardState {
   switch (action.type) {
+    case DashBoardActionTypes.LoadDashBoardItems:
+      return {
+        items: state.items,
+        cartItems: null,
+      };
     case DashBoardActionTypes.LoadCartItems:
       return {
         items: state.items,

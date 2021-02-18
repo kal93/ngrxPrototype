@@ -1,5 +1,5 @@
 export * from './lib/core-state.module';
-import { ActionReducerMap } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromDashBoard from './lib/dashboard/dashboard.reducer';
 
 export interface AppState {
@@ -10,4 +10,10 @@ export const reducer : ActionReducerMap<AppState> = {
     items: fromDashBoard.dashBoardReducer
 }
 
-export { DashBoardActions, LoadCartItems, AddNewItemToCart, IncreaseQty, DecreaseQty } from './lib/dashboard/dashboard.actions';
+// -------------------------------------------------------------------
+// DASHBOARD SELECTORS
+// -------------------------------------------------------------------
+export const selectDashBoardState = createFeatureSelector<fromDashBoard.DashBoardState>('items');
+
+ 
+export { DashBoardActions, LoadCartItems, AddNewItemToCart, IncreaseQty, DecreaseQty, LoadDashBoardItems } from './lib/dashboard/dashboard.actions';
