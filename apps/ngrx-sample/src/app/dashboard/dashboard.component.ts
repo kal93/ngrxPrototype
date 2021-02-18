@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '@jl/core-data';
 import { select, Store } from '@ngrx/store';
+import { AddNewItemToCart, DecreaseQty, IncreaseQty, LoadCartItems } from '@jl/core-state';
 import { DashBoardState } from 'libs/core-state/src/lib/dashboard/dashboard.reducer';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
@@ -30,19 +31,19 @@ export class DashboardComponent implements OnInit {
   }
 
   loadCartItems() {
-    this.store.dispatch({type: 'loadCartItems'});
+    this.store.dispatch(new LoadCartItems());
   }
 
   addNewItemToCart(event) {
-    this.store.dispatch({ type: 'addNewItemToCart', payLoad: event});
+    this.store.dispatch(new AddNewItemToCart(event));
   }
 
   increaseQty(event) {
-    this.store.dispatch({ type: 'incrementQty', payLoad: event});
+    this.store.dispatch(new IncreaseQty(event));
   }
 
   decreaseQty(event) {
-    this.store.dispatch({ type: 'decrementQty', payLoad: event});
+    this.store.dispatch(new DecreaseQty(event));
   }
 }
 

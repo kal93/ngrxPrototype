@@ -10,3 +10,4 @@ export const reducer : ActionReducerMap<AppState> = {
     items: fromDashBoard.dashBoardReducer
 }
 
+export { DashBoardActions, LoadCartItems, AddNewItemToCart, IncreaseQty, DecreaseQty } from './lib/dashboard/dashboard.actions';

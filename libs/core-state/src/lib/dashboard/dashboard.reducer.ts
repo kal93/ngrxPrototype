@@ -1,5 +1,7 @@
 import { Item } from '@jl/core-data';
 import { Action } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { DashBoardActionTypes } from './dashboard.actions';
 
 const initialItems: Item[] = [
   {
@@ -78,28 +80,32 @@ export const initialState: DashBoardState = {
   items: initialItems,
   cartItems: null,
 };
+
+// export interface DashBoardState extends EntityState<Item> {
+
+// }
 export function dashBoardReducer(
   state: DashBoardState = initialState,
   action
 ): DashBoardState {
   switch (action.type) {
-    case 'loadCartItems':
+    case DashBoardActionTypes.LoadCartItems:
       return {
         items: state.items,
         cartItems: getItemsInCart(state.items),
       };
-    case 'addNewItemToCart':
+    case DashBoardActionTypes.AddNewItemToCart:
       return {
         items: updateItems(state.items, action.payLoad),
         // cartItems: getItemsInCart(state.items),
         cartItems: addNewItemToCart(state.cartItems, action.payLoad),
       };
-    case 'incrementQty':
+    case DashBoardActionTypes.IncreaseQty:
       return {
         items: incrementExistingItem(state.items, action.payLoad),
         cartItems: incrementExistingItem(state.cartItems, action.payLoad),
       };
-    case 'decrementQty':
+    case DashBoardActionTypes.DecreaseQty:
       return {
         items: decrementExistingItem(state.items, action.payLoad),
         cartItems: decrementExistingItem(state.cartItems, action.payLoad),
