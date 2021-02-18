@@ -3,6 +3,7 @@
     <ng-container *ngFor="let item of items$ | async">
       <jl-selectable-items [item]="item"
       (addToCart)="addNewItemToCart($event)"
+      (removeFromCart)="removeItemFromCart($event)"
       (increment)="increaseQty($event)"
       (decrement)="decreaseQty($event)"
       ></jl-selectable-items>

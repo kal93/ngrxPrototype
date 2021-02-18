@@ -19,6 +19,11 @@ export class AddNewItemToCart implements Action {
   constructor(public payLoad) {}
 }
 
+export class RemoveItemFromCart implements Action {
+  readonly type = DashBoardActionTypes.RemoveItemFromCart;
+  constructor(public payLoad) {}
+}
+
 export class IncreaseQty implements Action {
   readonly type = DashBoardActionTypes.IncreaseQty;
   constructor(public payLoad) {}
@@ -34,8 +39,4 @@ export class LoadDashBoardItems implements Action {
   constructor(public payLoad: Item[]) {}
 }
 
-export type DashBoardActions = AddNewItemToCart | IncreaseQty | DecreaseQty | LoadDashBoardItems;
-
-
-// case DashBoardActionTypes.LoadDashBoardItems:
-//       return adapter.addMany(action.payLoad, state);
+export type DashBoardActions = AddNewItemToCart | IncreaseQty | DecreaseQty | LoadDashBoardItems | RemoveItemFromCart;

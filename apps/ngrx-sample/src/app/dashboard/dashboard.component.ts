@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '@jl/core-data';
 import { AddNewItemToCart, DecreaseQty, IncreaseQty, LoadCartItems, LoadDashBoardItems, selectDashBoardState } from '@jl/core-state';
 import { select, Store } from '@ngrx/store';
+import { RemoveItemFromCart } from 'libs/core-state/src/lib/dashboard/dashboard.actions';
 import { DashBoardState, initialItems } from 'libs/core-state/src/lib/dashboard/dashboard.reducer';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -46,6 +47,10 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(new AddNewItemToCart(event));
   }
 
+  removeItemFromCart(event) {
+    this.store.dispatch(new RemoveItemFromCart(event));
+  }
+
   increaseQty(event) {
     this.store.dispatch(new IncreaseQty(event));
   }
@@ -54,4 +59,3 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(new DecreaseQty(event));
   }
 }
-

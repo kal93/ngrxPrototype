@@ -18,14 +18,15 @@ export class SelectableItemsComponent implements OnInit {
   @Output() increment = new EventEmitter();
   @Output() decrement = new EventEmitter();
   @Output() addToCart = new EventEmitter();
+  @Output() removeFromCart = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   onDecrement(item: Item) {
-    if(item.quantity <= 0) {
-      return;
+    if(item.quantity <= 1) {
+      this.removeFromCart.emit(item);
     }
     // item.quantity = item.quantity - 1;
     this.decrement.emit(item);

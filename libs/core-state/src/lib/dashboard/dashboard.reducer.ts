@@ -53,6 +53,13 @@ const addNewItemToCart = (items, item: Item) => {
   console.log([...items, itemTobeAdded]);
   return [...items, itemTobeAdded];
 };
+
+const removeItemFromCart = (items: Item[], item: Item) => {
+  const a = items.filter((i) => i.name !== item.name);
+  console.log('....');
+  console.log(a);
+  return a;
+}
 const incrementExistingItem = (items: Item[], item: Item) =>
   items.map((i) => {
     return i.name === item.name ? { ...item, quantity: item.quantity + 1 } : i;
@@ -105,6 +112,12 @@ export function dashBoardReducer(
         items: updateItems(state.items, action.payLoad),
         // cartItems: getItemsInCart(state.items),
         cartItems: addNewItemToCart(state.cartItems, action.payLoad),
+      };
+      case DashBoardActionTypes.RemoveItemFromCart:
+      return {
+        items: updateItems(state.items, action.payLoad),
+        // cartItems: getItemsInCart(state.items),
+        cartItems: removeItemFromCart(state.cartItems, action.payLoad),
       };
     case DashBoardActionTypes.IncreaseQty:
       return {
