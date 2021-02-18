@@ -3,5 +3,5 @@ export interface Item {
     name: string;
     image: string;
     price: number;
-    quantity?: number;
+    quantity: number;
 }

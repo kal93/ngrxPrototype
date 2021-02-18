@@ -12,28 +12,36 @@ import { map } from 'rxjs/operators'
 })
 export class DashboardComponent implements OnInit {
   items$ : Observable<Item[]>;
+  cartItems$: Observable<Item[]>;
 
   constructor(private store: Store<DashBoardState>) {
     this.items$ = store.pipe(
       select('items'),
       map((state: any) => state.items) // unable to strongly type state parameter to DashBoardState
       );
+      this.cartItems$ = store.pipe(
+        select('items'),
+        map((state: any) => state.cartItems) // unable to strongly type state parameter to DashBoardState
+        );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadCartItems();
+  }
+
+  loadCartItems() {
+    this.store.dispatch({type: 'loadCartItems'});
+  }
 
   addNewItemToCart(event) {
-    console.log('Add new item to cart',event);
     this.store.dispatch({ type: 'addNewItemToCart', payLoad: event});
   }
 
   increaseQty(event) {
-    console.log('Increase qty',event);
     this.store.dispatch({ type: 'incrementQty', payLoad: event});
   }
 
   decreaseQty(event) {
-    console.log('decrease qty',event);
     this.store.dispatch({ type: 'decrementQty', payLoad: event});
   }
 }

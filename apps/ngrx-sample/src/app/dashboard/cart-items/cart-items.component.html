@@ -1,3 +1,9 @@
-<pre>
+<!-- <pre>
     {{ _items | json}}
-</pre>
+</pre> -->
+
+<ol>
+    <li *ngFor="let cartItem of _items">
+        {{cartItem?.name}} - {{cartItem?.quantity}}
+    </li>
+</ol>
