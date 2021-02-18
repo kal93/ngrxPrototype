@@ -1,52 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '@jl/core-data';
+import { select, Store } from '@ngrx/store';
+import { DashBoardState } from 'libs/core-state/src/lib/dashboard/dashboard.reducer';
+import { from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
+// import { DashBoardState } from '@jl/core-state'
 @Component({
   selector: 'jl-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  items = DATA;
-  constructor() {}
+  items$ : Observable<Item[]>;
+
+  constructor(private store: Store<DashBoardState>) {
+    this.items$ = store.pipe(
+      select('items'),
+      map((state: any) => state.items) // unable to strongly type state parameter to DashBoardState
+      );
+  }
 
   ngOnInit(): void {}
+
+  addNewItemToCart(event) {
+    console.log('Add new item to cart',event);
+    this.store.dispatch({ type: 'addNewItemToCart', payLoad: event});
+  }
+
+  increaseQty(event) {
+    console.log('Increase qty',event);
+    this.store.dispatch({ type: 'incrementQty', payLoad: event});
+  }
+
+  decreaseQty(event) {
+    console.log('decrease qty',event);
+    this.store.dispatch({ type: 'decrementQty', payLoad: event});
+  }
 }
 
-const DATA: Item[] = [
-  {
-    name: 'Cap',
-    image:
-      'https://drive.google.com/uc?export=view&id=1IENs8fKOYpjeFfPdrHr3mRODYcz1s_gn',
-    price: 299.0,
-  },
-  {
-    name: 'Shades',
-    image:
-      'https://drive.google.com/uc?export=view&id=1BGCosKHSfLmxsm3JzNe_MTcBQ33KieSW',
-    price: 1099.0,
-  },
-  {
-    name: 'T-Shirt',
-    image:
-      'https://drive.google.com/uc?export=view&id=14nELhUsFtf5892K-d_i4wFFzD5Sudg7v',
-    price: 799.0,
-  },
-  {
-    name: 'Jeans',
-    image:
-      'https://drive.google.com/uc?export=view&id=18y944GiqgoOnC5BPOeAQXhMTbIOF9MWo',
-    price: 2999.0,
-  },
-  {
-    name: 'Socks',
-    image:
-      'https://drive.google.com/uc?export=view&id=1XHCNNuoDUnP-Ys0vJ69Nt9477VSIWQo8',
-    price: 99.0,
-  },
-  {
-    name: 'Shoe',
-    image:
-      'https://drive.google.com/uc?export=view&id=1ElqRr2l9WnrboYW6Fou_izgk_XpRh9sU',
-    price: 5499.0,
-  },
-];

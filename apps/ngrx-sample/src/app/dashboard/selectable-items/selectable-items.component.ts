@@ -24,22 +24,20 @@ export class SelectableItemsComponent implements OnInit {
   ngOnInit(): void {}
 
   onDecrement(item: Item) {
-    console.log(item);
     if(item.quantity <= 0) {
       return;
     }
-    item.quantity = item.quantity - 1;
+    // item.quantity = item.quantity - 1;
     this.decrement.emit(item);
   }
 
   onIncrement(item: Item) {
-    console.log(item);
-    item.quantity = item.quantity + 1;
+    // item.quantity = item.quantity + 1;
     this.increment.emit(item);
   }
 
   onAddToCart(item) {
-    item.quantity = 1;
+    // item.quantity = 1;
     this.addToCart.emit(item);
   }
 }

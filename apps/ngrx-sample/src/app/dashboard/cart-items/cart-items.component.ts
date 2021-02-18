@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Item } from '@jl/core-data';
 
 @Component({
   selector: 'jl-cart-items',
@@ -6,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart-items.component.scss']
 })
 export class CartItemsComponent implements OnInit {
+
+  _items: Item;
+
+  @Input() set items(items: Item) {
+    if (items) {
+      this._items = items;
+    }
+  }
 
   constructor() { }
 
