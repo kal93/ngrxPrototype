@@ -1,1 +1,23 @@
-<p>selectable-items works!</p>
+<div class="mat-elevation-z3 selectable-items">
+  <div class="item-image-container">
+    <img [src]="_item?.image" [alt]="_item?.name" />
+  </div>
+  <div class="item-name">
+    {{ _item?.name }}
+  </div>
+  <div class="price">
+    <span>{{ _item?.price}}</span>
+  </div>
+  <div *ngIf="_item?.quantity > 0" class="quantity">
+    <button mat-icon-button (click)="onDecrement(_item)">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <span>{{ _item?.quantity}}</span>
+    <button mat-icon-button (click)="onIncrement(_item)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <ng-container *ngIf="!_item?.quantity || _item?.quantity <= 0">
+  <button mat-stroked-button color="primary" (click)="onAddToCart(_item)">Add To Cart</button>
+</ng-container>
+</div>

@@ -1,0 +1,32 @@
+.selectable-items {
+    width: fit-content;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 8px;
+    padding: 8px;
+}
+
+.item-image-container > img{
+    width: 362px;
+    height: 341px;
+}
+
+.selectable-items > div{
+    padding: 8px;
+}
+
+.quantity {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 5px;
+}
+
+.quantity > span {
+    min-width: fit-content;
+    background-color: lightgray;
+    padding: 5px;
+}
