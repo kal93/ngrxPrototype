@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@env/*": ["apps/ngrx-sample/src/environments/*"],
       "@jl/core-data": ["libs/core-data/src/index.ts"],
       "@jl/core-state": ["libs/core-state/src/index.ts"],
       "@jl/material": ["libs/material/src/index.ts"]

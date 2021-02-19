@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '@jl/core-data';
+import { Item, ItemService } from '@jl/core-data';
 import { AddNewItemToCart, DecreaseQty, IncreaseQty, LoadCartItems, LoadDashBoardItems, selectDashBoardState } from '@jl/core-state';
 import { select, Store } from '@ngrx/store';
 import { RemoveItemFromCart } from 'libs/core-state/src/lib/dashboard/dashboard.actions';
@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   items$ : Observable<Item[]>;
   cartItems$: Observable<Item[]>;
 
-  constructor(private store: Store<DashBoardState>) {
+  constructor(private store: Store<DashBoardState>, private itemService: ItemService) {
     this.items$ = store.pipe(
       select(selectDashBoardState),
       // map((data: any) => data.entities),
@@ -33,6 +33,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadDashBoardItems();
     this.loadCartItems();
+    this.itemService.allItems().subscribe((resp) => {
+      console.log(resp, '.......');
+    });
   }
 
   loadCartItems() {
