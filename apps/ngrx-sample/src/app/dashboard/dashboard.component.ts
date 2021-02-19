@@ -33,9 +33,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadDashBoardItems();
     this.loadCartItems();
-    this.itemService.allItems().subscribe((resp) => {
-      console.log(resp, '.......');
-    });
   }
 
   loadCartItems() {
@@ -43,7 +40,7 @@ export class DashboardComponent implements OnInit {
   }
 
   loadDashBoardItems() {
-    this.store.dispatch(new LoadDashBoardItems(initialItems))
+    this.store.dispatch(new LoadDashBoardItems())
   }
 
   addNewItemToCart(event) {

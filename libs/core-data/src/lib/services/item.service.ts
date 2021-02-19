@@ -13,6 +13,7 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
   allItems(): Observable<Item[]> {
+    console.log('............pppppp');
     return this.http.get<Item[]>(this.getApiUrl());
   }
 
