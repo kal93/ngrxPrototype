@@ -98,10 +98,11 @@ export function dashBoardReducer(
 ): DashBoardState {
   switch (action.type) {
     case DashBoardActionTypes.DashBoardItemsLoaded:
+      console.log(state, 'inside loaded');
       console.log(action.type);
       return {
-        items: state.items,
-        cartItems: null,
+        items: action.payLoad,
+        cartItems: [],
       };
     case DashBoardActionTypes.LoadCartItems:
       return {
@@ -131,7 +132,7 @@ export function dashBoardReducer(
         cartItems: decrementExistingItem(state.cartItems, action.payLoad),
       };
     default:
-      console.log(action.type);
+      console.log(action.type, state);
       console.log('default...');
       return state;
   }

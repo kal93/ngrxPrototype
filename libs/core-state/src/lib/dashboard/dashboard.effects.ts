@@ -21,34 +21,35 @@ export class DashBoardEffects {
    * What we're doing here is creating a middleware which takes an incoming trigger object
    * and puts something else out in this case the completion action
    * */
-  @Effect() loadDashBoardItems$ = this.dataPersistence.fetch(
-    DashBoardActionTypes.LoadDashBoardItems, // trigger object
-    {
-      run: (action: LoadDashBoardItems, state: DashBoardState) => {
-          console.log('Running...');
-        this.itemService.allItems().pipe(
-          map((response: Item[]) => {
-              console.log(response, 'res')
-            new DashBoardItemsLoaded(response); // completed action
-          })
-        );
-      },
-      onError: (action: LoadDashBoardItems, e) => {
-        console.log(action, e);
-      },
-    }
-  );
-
-  // loadDashBoardItems$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(DashBoardActionTypes.LoadDashBoardItems),
-  //     mergeMap(() =>
+  // @Effect() loadDashBoardItems$ = this.dataPersistence.fetch(
+  //   DashBoardActionTypes.LoadDashBoardItems, // trigger object
+  //   {
+  //     run: (action: LoadDashBoardItems, state: DashBoardState) => {
+  //         console.log('Running...');
   //       this.itemService.allItems().pipe(
-  //         map((response) => ({ type: '[ItemList] Dash Board Items Loaded', payLoad: response})),
-  //         catchError(() => EMPTY)
+  //         map((response) => new DashBoardItemsLoaded(response)) // completed action
   //       )
-  //     )
-  //   )
+  //       .subscribe((a) => {
+  //         console.log(a, '...')
+  //       });
+  //     },
+  //     onError: (action: LoadDashBoardItems, e) => {
+  //       console.log(action, e);
+  //     },
+  //   }
+  // );
+  @Effect()
+  loadDashBoardItems$ = 
+  // createEffect(() =>
+    this.actions$.pipe(
+      ofType(DashBoardActionTypes.LoadDashBoardItems),
+      mergeMap(() =>
+        this.itemService.allItems().pipe(
+          map((response) => (new DashBoardItemsLoaded(response))),
+          catchError(() => EMPTY)
+        )
+      )
+    )
   // );
 
   constructor(
