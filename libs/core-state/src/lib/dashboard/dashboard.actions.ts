@@ -3,7 +3,8 @@ import { Action } from '@ngrx/store';
 
 export enum DashBoardActionTypes {
   LoadCartItems = '[Cart] Load Cart Items',
-  LoadDashBoardItems = '[ItemList] Load Dash Board Items',
+  LoadDashBoardItems = '[ItemList] Load Dash Board Items',// Incoming action
+  DashBoardItemsLoaded = '[ItemList] Dash Board Items Loaded', // action completion
   AddNewItemToCart = '[ItemList] Add New Item to Cart',
   IncreaseQty = '[ItemList] Increase Quantity',
   DecreaseQty = '[ItemList] Decrease Quantity',
@@ -36,7 +37,20 @@ export class DecreaseQty implements Action {
 
 export class LoadDashBoardItems implements Action {
   readonly type = DashBoardActionTypes.LoadDashBoardItems;
-  constructor(public payLoad: Item[]) {}
+  // constructor(public payLoad: Item[]) {}
 }
 
-export type DashBoardActions = AddNewItemToCart | IncreaseQty | DecreaseQty | LoadDashBoardItems | RemoveItemFromCart;
+export class DashBoardItemsLoaded implements Action {
+  readonly type = DashBoardActionTypes.DashBoardItemsLoaded;
+  constructor(public payLoad: Item[]) {
+    console.log(payLoad, 'ooooo');
+  }
+}
+
+export type DashBoardActions =
+  | AddNewItemToCart
+  | IncreaseQty
+  | DecreaseQty
+  | LoadDashBoardItems
+  |DashBoardItemsLoaded
+  | RemoveItemFromCart;

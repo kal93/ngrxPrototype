@@ -16,4 +16,5 @@ export const reducer : ActionReducerMap<AppState> = {
 export const selectDashBoardState = createFeatureSelector<fromDashBoard.DashBoardState>('items');
 
  
-export { DashBoardActions, LoadCartItems, AddNewItemToCart, IncreaseQty, DecreaseQty, LoadDashBoardItems } from './lib/dashboard/dashboard.actions';
+export { DashBoardActions, LoadCartItems, AddNewItemToCart, IncreaseQty, DecreaseQty, LoadDashBoardItems, DashBoardItemsLoaded } from './lib/dashboard/dashboard.actions';
+export { DashBoardEffects } from './lib/dashboard/dashboard.effects';

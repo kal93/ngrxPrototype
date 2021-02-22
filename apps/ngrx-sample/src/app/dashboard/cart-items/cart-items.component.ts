@@ -7,6 +7,7 @@ import { Item } from '@jl/core-data';
   styleUrls: ['./cart-items.component.scss']
 })
 export class CartItemsComponent implements OnInit {
+  displayedColumns = ['index', 'item', 'quantity'];
 
   _items: Item;
 
