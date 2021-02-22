@@ -6,7 +6,7 @@
     {{ _item?.name }}
   </div>
   <div class="price">
-    <span>{{ _item?.price}}</span>
+    <span>{{ _item?.price | currency }}</span>
   </div>
   <ng-container *ngIf="_item?.quantity > 0">
   <div class="quantity">
