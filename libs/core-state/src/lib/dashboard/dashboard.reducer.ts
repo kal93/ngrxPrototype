@@ -79,9 +79,22 @@ const updateItems = (items: Item[], item: Item) =>
     return i.name === item.name ? { ...item, quantity: 1 } : i;
   });
 
+const getTotalPriceOfCart = (items: Item[]) => {
+const sum = items.map((i) => {
+  if(i.quantity !== 0) {
+    return i.quantity * i.price;
+  } else {
+    return 0;
+  }
+});
+return sum.reduce((acc, val) => acc+val,0);
+}
+const sumValues = (items) => Object.keys(items).reduce((acc, value) => acc + items[value], 0);
+
 export interface DashBoardState {
   items: Item[];
   cartItems?: Item[] | null;
+  totalPrice?: number | null;
 }
 
 export const initialState: DashBoardState = {
@@ -103,33 +116,40 @@ export function dashBoardReducer(
       return {
         items: action.payLoad,
         cartItems: [],
+        totalPrice: getTotalPriceOfCart(state.items)
       };
     case DashBoardActionTypes.LoadCartItems:
       return {
         items: state.items,
         cartItems: getItemsInCart(state.items),
+        totalPrice: getTotalPriceOfCart(state.items)
       };
     case DashBoardActionTypes.AddNewItemToCart:
+      console.log(getTotalPriceOfCart(state.items));
       return {
         items: updateItems(state.items, action.payLoad),
         // cartItems: getItemsInCart(state.items),
         cartItems: addNewItemToCart(state.cartItems, action.payLoad),
+        totalPrice: getTotalPriceOfCart(state.items)
       };
       case DashBoardActionTypes.RemoveItemFromCart:
       return {
         items: updateItems(state.items, action.payLoad),
         // cartItems: getItemsInCart(state.items),
         cartItems: removeItemFromCart(state.cartItems, action.payLoad),
+        totalPrice: getTotalPriceOfCart(state.items)
       };
     case DashBoardActionTypes.IncreaseQty:
       return {
         items: incrementExistingItem(state.items, action.payLoad),
         cartItems: incrementExistingItem(state.cartItems, action.payLoad),
+        totalPrice: getTotalPriceOfCart(state.items)
       };
     case DashBoardActionTypes.DecreaseQty:
       return {
         items: decrementExistingItem(state.items, action.payLoad),
         cartItems: decrementExistingItem(state.cartItems, action.payLoad),
+        totalPrice: getTotalPriceOfCart(state.items)
       };
     default:
       console.log(action.type, state);

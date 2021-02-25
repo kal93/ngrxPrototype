@@ -25,6 +25,7 @@
     "ngrx-sample-e2e": { "tags": [], "implicitDependencies": ["ngrx-sample"] },
     "core-data": { "tags": [] },
     "core-state": { "tags": [] },
-    "material": { "tags": [] }
+    "material": { "tags": [] },
+    "node-app": { "tags": [] }
   }
 }
